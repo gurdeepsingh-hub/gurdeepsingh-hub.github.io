@@ -103,7 +103,7 @@ const getBalance = WalletContract.getBalance();
 const Bal = await getBalance;
 Balance=Bal/1000000000000000000;
 console.log(Balance);
-document.getElementById("Bal").innerText=Balance +"ETH";
+document.getElementById("Bal").innerText=Balance +" ETH";
 }
 
 function copy(that){
@@ -181,7 +181,7 @@ button1 {
       
       <div class="info">
          <h2>
-         <div class="title" id="bal">
+         <div class="title" id="Bal">
          </div></h2>
          <button1 onclick="getBalance()">REFRESH BALANCE</button1>
       <div>
