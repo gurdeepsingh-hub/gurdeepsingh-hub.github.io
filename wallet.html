@@ -103,11 +103,44 @@ const getBalance = WalletContract.getBalance();
 const Bal = await getBalance;
 Balance=Bal/1000000000000000000;
 console.log(Balance);
-document.getElementById("Bal").innerText=Balance +" ETH";
+document.getElementById("Bal").innerText=Balance +"ETH";
 }
 
+function copy(that){
+var inp =document.createElement('input');
+document.body.appendChild(inp)
+inp.value =that.textContent
+inp.select();
+document.execCommand('copy',false);
+inp.remove();
+}
 </script>
-
+<style>
+button1 {
+   display: inline-block;
+   background-color: orangered;
+   border-radius: 10px;
+   border: 4px white;
+   color: white;
+   text-align: center;
+   font-size: 20px;
+   padding: 10px;
+   width: auto;
+   -webkit-transition: all 0.5s;
+   -moz-transition: all 0.5s;
+   -o-transition: all 0.5s;
+   transition: all 0.5s;
+   cursor: pointer;
+   margin: 4px;
+ }
+ a:link, a:visited {
+  color: white;
+  padding: 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+ </style>
 </head>
 
 <body data-spy="scroll" data-target="#navbarSupportedContent">
@@ -136,8 +169,10 @@ document.getElementById("Bal").innerText=Balance +" ETH";
 <div class="container">
    <div class="wrapper">
       <div class="header">
-         <div class="price">
-            <h1>Account 1</h1>
+         <div class="price" style= >
+            <h1>Account Address</h1>
+            <h9><button onclick="copy(this)" style="color:orangered; background-color: white; font-size:larger; font:bolder; ">0x2bcc53D8ba729e558d00350eB5f0Ed2d800be53 </button></h9>
+            <div><input/></div>
          </div>
       </div>
       <div class="product">
@@ -145,13 +180,14 @@ document.getElementById("Bal").innerText=Balance +" ETH";
          </div>
       
       <div class="info">
-         <h1>
-         <div class="title" id="Bal">
-           <span id="bal"><span/>
-         </div></h1>
-         <button class="buyBtn" onclick="getBalance()">REFRESH BALANCE</button>
-
-         <button class="buyBtn"><a href="index2.html">Send</a></button>
+         <h2>
+         <div class="title">
+            <span id="bal"></span>
+         </div></h2>
+         <button1 onclick="getBalance()">REFRESH BALANCE</button1>
+      <div>
+         <button1 style="color: white ;"><a href="index2.html">SEND</a></button1>
+      </div>
       </div>
    </div>
 </div>
