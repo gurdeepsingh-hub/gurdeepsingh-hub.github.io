@@ -103,7 +103,7 @@ const getBalance = WalletContract.getBalance();
 const Bal = await getBalance;
 Balance=Bal/1000000000000000000;
 console.log(Balance);
-document.getElementById("Bal").innerText=Balance +" ETH";
+document.getElementById("Bal").innerText=Balance +"ETH";
 }
 
 function copy(that){
@@ -113,6 +113,11 @@ inp.value =that.textContent
 inp.select();
 document.execCommand('copy',false);
 inp.remove();
+}
+
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
 }
 </script>
 <style>
@@ -140,6 +145,62 @@ button1 {
   text-decoration: none;
   display: inline-block;
 }
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
  </style>
 </head>
 
@@ -154,7 +215,6 @@ button1 {
         <div class="collapse navbar-collapse" id="mynav">
         <ul class="navbar-nav ml-auto text-center">
           <!--<li class="nav-item"><a href="#" class="nav-link active">Home</a></li>-->
-         
 
 </div>
 </div>
@@ -170,7 +230,10 @@ button1 {
       <div class="header">
          <div class="price" style= >
             <h1>Account Address</h1>
+            <div class="popup" onclick="myFunction()">
             <h9><button onclick="copy(this)" style="color:orangered; background-color: white; font-size:larger; font:bolder; ">0x2bcc53D8ba729e558d00350eB5f0Ed2d800be53 </button></h9>
+            <span class="popuptext" id="myPopup">Copied..</span>
+         </div>
             <div><input/></div>
          </div>
       </div>
