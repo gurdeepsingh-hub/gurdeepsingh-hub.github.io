@@ -1,128 +1,167 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.98.0">
-    <title> my wallet Sign in</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sign-in/">
-
-    
-
-    
-
-<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-      .b-example-divider {
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
-    </style>
-
-    
-    <!-- Custom styles for this template -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style3.css">
     <link href="signin.css" rel="stylesheet">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
-  <body class="text-center">
+  <body>
+    <main class="form-signin w-100 m-auto">
+      <form>
+    <div id="card-success" class="hidden">
+      <i class="fa fa-check"></i>
+      <p>Payment Successful!</p>
+    </div>
+    <div id="form-errors" class="hidden">
+      <i class="fa fa-exclamation-triangle"></i>
+      <p id="card-error">Card error</p>
+    </div>
+    <div id="form-container" style="align-self: center;">
     
-<main class="form-signin w-100 m-auto">
-  <form>
-    <img class="mb-4" src="../assets/brand/my-wallet-logo.svg" alt="" width="72" height="57">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
-    <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email address</label>
+      <div id="card-front">
+        <div id="shadow"></div>
+        <div id="image-container">
+          <span id="amount"> <strong>Enter Card detalis:</strong></span>
+          <span id="card-image">
+          
+            </span>
+        </div>
+        <!--- end card image container --->
+    
+        <label for="card-number">
+            Card Number
+          </label>
+        <input type="text" id="card-number" placeholder="1234 5678 9101 1112" length="16">
+        <div id="cardholder-container">
+          <label for="card-holder">Card Holder
+          </label>
+          <input type="text" id="card-holder" placeholder="e.g. John Doe" />
+        </div>
+        <!--- end card holder container --->
+        <div id="exp-container">
+          <label for="card-exp">
+              Expiration
+            </label>
+          <input id="card-month" type="text" placeholder="MM" length="2">
+          <input id="card-year" type="text" placeholder="YY" length="2">
+        </div>
+            <div id="cvc-container">
+          <label for="card-cvc"> CVC/CVV</label>
+          <input id="card-cvc" placeholder="XXX-X" type="text" min-length="3" max-length="4">
+          <p>Last 3 or 4 digits</p>
+        </div>
+        <!--- end CVC container --->
+        <!--- end exp container --->
+      </div>
+      <!--- end card front --->
+      <div id="card-back">
+        <div id="card-stripe">
+        </div>
+    
+      </div>
+      <!--- end card back --->
+      <input type="text" id="card-token" />
+      <button type="button" id="card-btn" style="background-color: orangered; color: white;">Submit</button>
+    
     </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
-    </div>
 
-  
-    <button class="w-100 btn btn-lg btn-primary" type="submit" style="background-color: orangered; border-color: orangered;" onclick="return validate()" > Sign in</button>
+    <!--- end form container --->
   </form>
 </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="https://use.fontawesome.com/f1e0bf0cbc.js"></script>
+    <script>$(document).ready(function () {
 
-<script>
-
-var attempt = 3; // Variable to count number of attempts.
-
-  // Below function Executes on click of login button.
-  function validate(){
-  var username = document.getElementById("floatingInput").value;
-  var password = document.getElementById("floatingPassword").value;
-  if (username == "sampleEmail@personal.com" && password == "sample123")
-  {
-  alert ("Login successfully");
-  window.location.href = "creditcard.html" ; // Redirecting to other page.
-  return false;
-  }
-
-  else{
-  attempt --;// Decrementing by one.
-  alert("You have left "+attempt+" attempt;");
-  // Disabling fields after 3 attempts.
-  if( attempt == 0){
-  document.getElementById("username").disabled = true;
-  document.getElementById("password").disabled = true;
-  document.getElementById("submit").disabled = true;
-  return false;
-  }
-  }
-  }
+      Stripe.setPublishableKey('pk_test_9D43kM3d2vEHZYzPzwAblYXl');
+  
+      var cardNumber, cardMonth, cardYear, cardCVC, cardHolder;
+  
+      // check for any empty inputs
+      function findEmpty() {
+          var emptyText = $('#form-container input').filter(function () {
+  
+              return $(this).val == null;
+          });
+  
+          // add invalid class to empty inputs
+          console.log(emptyText.prevObject);
+          emptyText.prevObject.addClass('invalid');
+      }
+  
+      // check for card type and display corresponding icon
+      function checkCardType() {
+          cardNumber = $('#card-number').val();
+          var cardType = Stripe.card.cardType(cardNumber);
+          switch (cardType) {
+              case 'Visa':
+                  $('#card-image').html('<img src="./assets/brand/visa-svgrepo-com.svg" height="100%">');
+                  break;
+              case 'MasterCard':
+                  $('#card-image').html('<img src="./assets/brand/mastercard-svgrepo-com.svg" height="100%">');
+                  break;
+              case 'Discover':
+                  $('#card-image').html('<img src="./assets/brand/discover-svgrepo-com.svg" height="100%">');
+                  break;
+              case 'American Express':
+                  $('#card-image').html('<img src="./assets/brand/american-express-svgrepo-com.svg" height="100%">');
+                  break;
+              case 'Unknown':
+                  $('#card-image').html('<img src="./assets/brand/unknown-svgrepo-com.svg" height="55px">');
+                  break;
+          }
+      }
+  
+      // check card type on card number input blur 
+      $('#card-number').blur(function (event) {
+          event.preventDefault();
+          checkCardType();
+      });
+  
+      // on button click: 
+      $('#card-btn').click(function (event) {
+  
+          // get each input value and use Stripe to determine whether they are valid
+          var cardNumber = $('#card-number').val();
+          var isValidNo = Stripe.card.validateCardNumber(cardNumber);
+          var expMonth = $('#card-month').val();
+          var expYear = $('#card-year').val();
+          var isValidExpiry = Stripe.card.validateExpiry(expMonth, expYear);
+          var cardCVC = $('#card-cvc').val();
+          var isValidCVC = Stripe.card.validateCVC(cardCVC);
+          var cardHolder = $('#card-holder').val();
+          event.preventDefault();
+  
+          // alert the user if any fields are missing
+          if (!cardNumber || !cardCVC || !cardHolder || !expMonth || !expYear) {
+              console.log(cardNumber + cardCVC + cardHolder + cardMonth + cardYear);
+              $('#form-errors').addClass('hidden');
+              $('#card-success').addClass('hidden');
+              $('#form-errors').removeClass('hidden');
+              $('#card-error').text('Please complete all fields.');
+              findEmpty();
+          } else {
+  
+              // alert the user if any fields are invalid
+              if (!isValidNo || !isValidExpiry || !isValidCVC) {
+                  $('#form-errors').css('display', 'block');
+                  if (!isValidNo) {
+                      $('#card-error').text('Invalid credit card number.');
+                  } else if (!isValidExpiry) {
+                      $('#card-error').text('Invalid expiration date.')
+                  } else if (!isValidCVC) {
+                      $('#card-error').text('Invalid CVC code.')
+                  }
+  
+              } else {
+                  $('#card-success').removeClass('hidden');
+              }
+          }
+      })
+  
+  });
   </script>
-
-    
   </body>
 </html>
