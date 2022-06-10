@@ -4,9 +4,12 @@
 
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="style3.css">
-	
+    <link href="signin.css" rel="stylesheet">
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
+    <main class="form-signin w-100 m-auto">
+      <form>
     <div id="card-success" class="hidden">
       <i class="fa fa-check"></i>
       <p>Payment Successful!</p>
@@ -60,12 +63,13 @@
       </div>
       <!--- end card back --->
       <input type="text" id="card-token" />
-      <button type="button" id="card-btn">Submit</button>
+      <button type="button" id="card-btn" style="background-color: orangered; color: white;">Submit</button>
     
     </div>
 
     <!--- end form container --->
-    
+  </form>
+</main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script src="https://use.fontawesome.com/f1e0bf0cbc.js"></script>
